@@ -54,8 +54,7 @@ export const Motion: React.FC = () => {
   return (
     <Scene>
       <Canvas draw={draw} />
-      <Callout x={VIEW.x} y={VIEW.y + VIEW.h * 0.3} dx={-120} dy={-50} w={300} title="THE HORSE IN MOTION" sub="MUYBRIDGE · PALO ALTO · 1878" delay={20} />
-      <Callout x={VIEW.x + VIEW.w * 0.46} y={VIEW.y + VIEW.h * 0.7} dx={420} dy={20} w={260} title="四蹄腾空" sub="ALL FOUR HOOVES OFF THE GROUND" delay={108} />
+      <Callout x={VIEW.x + VIEW.w * 0.46} y={VIEW.y + VIEW.h * 0.7} dx={420} dy={20} w={260} title="四蹄腾空" sub="MUYBRIDGE · 1878" delay={100} />
       <Caption label="MOTION · 瞬间" zh="快门，终于快过了奔马。" en="At last, the shutter outran the galloping horse." delay={30} />
     </Scene>
   );

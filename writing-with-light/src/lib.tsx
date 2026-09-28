@@ -18,14 +18,19 @@ export const rng = (seed: number) => () => {
   return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
 };
 
+// `--scale` sets devicePixelRatio. Canvas filter lengths ignore the transform, so blur radii must be multiplied by DPR.
+export const DPR = window.devicePixelRatio || 1;
+
+// Full-frame canvas drawn in 1920 × 1080 units with a DPR-sized bitmap.
 export const Canvas: React.FC<{draw: (ctx: CanvasRenderingContext2D) => void; style?: React.CSSProperties}> = ({draw, style}) => {
   const ref = useRef<HTMLCanvasElement>(null);
   useLayoutEffect(() => {
     const ctx = ref.current!.getContext('2d')!;
     ctx.reset();
+    ctx.scale(DPR, DPR);
     draw(ctx);
   });
-  return <canvas ref={ref} width={W} height={H} style={{position: 'absolute', inset: 0, ...style}} />;
+  return <canvas ref={ref} width={W * DPR} height={H * DPR} style={{position: 'absolute', inset: 0, width: W, height: H, ...style}} />;
 };
 
 export const offscreen = (w: number, h: number, paint: (ctx: CanvasRenderingContext2D) => void) => {
@@ -82,9 +87,9 @@ export const makeThumbs = (imgs: Record<Img, HTMLImageElement>, n: number, seed:
     const [bx, by, bw, bh] = name === 'horse' ? horseFrame(Math.floor(r() * 11)) : [0, 0, img.naturalWidth, img.naturalHeight];
     const cw = bw * (0.45 + r() * 0.45), ch = cw * 0.75;
     const sx = bx + r() * (bw - cw), sy = by + r() * Math.max(0, bh - ch);
-    return offscreen(160, 120, (ctx) => {
+    return offscreen(320, 240, (ctx) => {
       ctx.filter = name === 'tartan' ? 'none' : `grayscale(1) sepia(${0.2 + r() * 0.5}) brightness(${0.9 + r() * 0.25})`;
-      ctx.drawImage(img, sx, sy, cw, Math.min(ch, bh), 0, 0, 160, 120);
+      ctx.drawImage(img, sx, sy, cw, Math.min(ch, bh), 0, 0, 320, 240);
     });
   });
 };

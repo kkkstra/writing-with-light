@@ -37,9 +37,6 @@ export const Outro: React.FC = () => {
           <span key={i} style={{opacity: prog(f, 24 + i * 6, 30 + i * 6), font: ch === '@' ? `italic 400 50px ${F.serif}` : undefined}}>{ch}</span>
         ))}
       </div>
-      <div style={{position: 'absolute', left: 0, right: 0, bottom: 150, textAlign: 'center', color: C.text, font: `300 14px ${F.mono}`, letterSpacing: '0.3em', opacity: 0.4 * prog(f, 40, 60)}}>
-        MUSIC · “DREAMS BECOME REAL” · KEVIN MACLEOD · INCOMPETECH.COM · CC BY 4.0
-      </div>
       <AbsoluteFill style={{background: '#000', opacity: prog(f, 80, 104, (t) => t)}} />
     </Scene>
   );

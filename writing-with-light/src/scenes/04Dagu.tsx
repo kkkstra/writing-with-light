@@ -3,7 +3,7 @@ import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {Canvas, fit, lerp, prog, rng, TAU, useImages} from '../lib';
 import {Callout, Caption, Scene} from '../ui';
 
-const R = fit(3441, 2472, 930, 490, 760, 540);
+const R = fit(3441, 2472, 960, 490, 760, 540);
 // The boulevard, receding from the lower left towards the vanishing point (normalised image coords, street half-width).
 const STREET: [number, number, number][] = [[0.0, 0.88, 0.075], [0.16, 0.68, 0.05], [0.3, 0.54, 0.03], [0.45, 0.42, 0.012]];
 const MAN = {x: R.x + 0.212 * R.w, y: R.y + 0.772 * R.h};
@@ -92,8 +92,7 @@ export const Dagu: React.FC = () => {
     <Scene>
       <AbsoluteFill style={{transform: `scale(${1 + 0.04 * prog(f, 0, 222, (t) => t)})`, transformOrigin: `${MAN.x}px ${MAN.y}px`}}>
         <Canvas draw={draw} />
-        <Callout x={MAN.x} y={MAN.y} dx={-200} dy={-50} w={300} title="第一个被拍下的人" sub="THE FIRST PERSON EVER PHOTOGRAPHED" delay={150} />
-        <Callout x={R.x + R.w * 0.82} y={R.y + R.h * 0.2} dx={200} dy={190} w={300} title="BOULEVARD DU TEMPLE" sub="DAGUERRE · PARIS · 1838 · 4–5 MIN" delay={60} />
+        <Callout x={MAN.x} y={MAN.y} dx={-200} dy={-50} w={300} title="第一个被拍下的人" sub="DAGUERRE · PARIS · 1838" delay={150} />
       </AbsoluteFill>
       <Caption label="DAGUERREOTYPE · 银版" zh="车马川流不息，只有一个擦鞋的人站得够久。" en="Traffic streamed past; only a man having his boots shined stood still long enough." delay={30} />
     </Scene>

@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
-import {Canvas, clamp, easeInOut, lerp, pagoda, prog, rng, TAU} from '../lib';
-import {C, F} from '../theme';
+import {Canvas, clamp, DPR, easeInOut, lerp, pagoda, prog, rng, TAU} from '../lib';
+import {C} from '../theme';
 import {Callout, Caption, Scene} from '../ui';
 
 const WALL = 860, HOLE = 470, SCREEN = 1440, OBJ_X = 420, BASE = 690, OBJ_H = 440;
@@ -33,7 +33,7 @@ export const Pinhole: React.FC = () => {
 
     const shape = (x: number, baseY: number, h: number, flip: number, fill: string, blur: number) => {
       ctx.save();
-      ctx.filter = blur ? `blur(${blur}px)` : 'none';
+      ctx.filter = blur ? `blur(${blur * DPR}px)` : 'none';
       ctx.translate(x, baseY);
       ctx.scale(h, h * flip);
       ctx.fillStyle = fill;
@@ -103,12 +103,6 @@ export const Pinhole: React.FC = () => {
     ctx.lineTo(SCREEN, 910);
     ctx.stroke();
     ctx.setLineDash([]);
-
-    ctx.font = `300 14px ${F.mono}`;
-    ctx.fillStyle = `rgba(236,232,225,${0.5 * prog(f, 60, 80)})`;
-    ctx.textAlign = 'center';
-    ctx.fillText('OBJECT · 物', OBJ_X, BASE + 36);
-    ctx.fillText('IMAGE · 像', SCREEN, IMG_TOP + 40);
   };
 
   // Ends where chapter 2 opens: the inverted image centred at x = 640, 1680 px tall.
@@ -117,7 +111,7 @@ export const Pinhole: React.FC = () => {
     <Scene fade={0}>
       <AbsoluteFill style={{transform: `translateX(${(640 - SCREEN) * prog(f, 150, 192, (t) => t * t)}px) scale(${push})`, transformOrigin: `${SCREEN}px ${(IMG_BASE + IMG_TOP) / 2}px`}}>
         <Canvas draw={draw} />
-        <Callout x={WALL} y={HOLE} dx={110} dy={-250} w={320} title="MOZI · 墨子 · c. 400 BCE" sub="景到，在午有端 ——《墨经》" delay={55} />
+        <Callout x={WALL} y={HOLE} dx={110} dy={-250} w={320} title="景到，在午有端" sub="《墨经》 · MOZI · c. 400 BCE" delay={55} />
       </AbsoluteFill>
       <Caption label="CAMERA OBSCURA · 小孔成像" zh="两千四百年前，墨子看见小孔把世界倒映在墙上。" en="Twenty-four centuries ago, Mozi saw a pinhole cast the world upside down." delay={20} />
       <AbsoluteFill style={{background: C.ink, opacity: prog(f, 175, 192, (t) => t)}} />

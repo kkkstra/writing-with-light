@@ -1,7 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Img, staticFile, useCurrentFrame} from 'remotion';
 import {easeInOut, fit, lerp, prog, rng} from '../lib';
-import {C, F} from '../theme';
 import {Callout, Caption, Scene} from '../ui';
 
 const BIG = fit(489, 638, 960, 450, 440, 580);
@@ -38,12 +37,7 @@ export const Negative: React.FC = () => {
         </div>
       </div>
       <AbsoluteFill style={{opacity: callouts}}>
-        <Callout x={BIG.x + BIG.w * 0.3} y={BIG.y + BIG.h * 0.33} dx={-150} dy={-90} w={360} title="LATTICED WINDOW · 1835" sub="LACOCK ABBEY · W. H. F. TALBOT" delay={16} />
-        <Callout x={BIG.x + BIG.w * 0.78} y={BIG.y + BIG.h * 0.62} dx={150} dy={110} w={340} title="现存最早的相机底片" sub="OLDEST SURVIVING CAMERA NEGATIVE" delay={40} />
-        <div style={{position: 'absolute', left: 1360, top: 300, width: 400, color: C.text, opacity: prog(f, 50, 70)}}>
-          <div style={{font: `italic 400 24px/1.45 ${F.serif}`, opacity: 0.85}}>“When first made, the squares of glass about 200 in number could be counted, with help of a lens.”</div>
-          <div style={{font: `300 14px ${F.mono}`, letterSpacing: '0.2em', opacity: 0.55, marginTop: 14}}>— TALBOT’S NOTE · AUG 1835</div>
-        </div>
+        <Callout x={BIG.x + BIG.w * 0.3} y={BIG.y + BIG.h * 0.33} dx={-150} dy={-90} w={300} title="现存最早的相机底片" sub="TALBOT · LACOCK ABBEY · 1835" delay={16} />
       </AbsoluteFill>
       <AbsoluteFill style={{background: '#fff', opacity: 1 - prog(f, 0, 18, (x) => x)}} />
       <Caption label="NEGATIVE · 负片" zh="一张底片，从此可以印出无数张照片。" en="From one negative, countless prints." delay={24} />

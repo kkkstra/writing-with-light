@@ -1,15 +1,10 @@
 import React, {useMemo} from 'react';
 import {useCurrentFrame} from 'remotion';
 import {Canvas, easeInOut, fit, lerp, offscreen, prog, useImages} from '../lib';
-import {F} from '../theme';
 import {Callout, Caption, Scene} from '../ui';
 
 const R = fit(1100, 900, 960, 455, 700, 575);
-const CHANNELS = [
-  {name: 'RED FILTER · 红', dx: -440, rgb: '255,120,110'},
-  {name: 'GREEN FILTER · 绿', dx: 0, rgb: '120,235,150'},
-  {name: 'BLUE FILTER · 蓝', dx: 440, rgb: '130,160,255'},
-];
+const OFFSETS = [-440, 0, 440];
 
 export const Colour: React.FC = () => {
   const f = useCurrentFrame();
@@ -39,7 +34,7 @@ export const Colour: React.FC = () => {
     const w = R.w * s, h = R.h * s;
     ctx.globalCompositeOperation = 'lighter';
     plates.forEach((p, i) => {
-      const cx = 960 + CHANNELS[i].dx * (1 - merge), cy = R.y + R.h / 2 + (i - 1) * 18 * (1 - merge);
+      const cx = 960 + OFFSETS[i] * (1 - merge), cy = R.y + R.h / 2 + (i - 1) * 18 * (1 - merge);
       ctx.globalAlpha = prog(f, i * 5, 18 + i * 5);
       ctx.drawImage(p.tint, cx - w / 2, cy - h / 2, w, h);
       ctx.globalAlpha *= 1 - tint;
@@ -47,23 +42,12 @@ export const Colour: React.FC = () => {
     });
     ctx.globalCompositeOperation = 'source-over';
     ctx.globalAlpha = 1;
-    ctx.textAlign = 'center';
-    ctx.font = `400 14px ${F.mono}`;
-    ctx.letterSpacing = '4px';
-    CHANNELS.forEach((c, i) => {
-      ctx.fillStyle = `rgba(${c.rgb},${0.8 * prog(f, 10, 30) * (1 - prog(f, 44, 60))})`;
-      ctx.fillText(c.name, 960 + c.dx, R.y + R.h / 2 + R.h * 0.26 + 34 + (i - 1) * 18);
-    });
-    ctx.textAlign = 'left';
-    ctx.fillStyle = `rgba(236,232,225,${0.6 * prog(f, 50, 60)})`;
-    ctx.fillText(`REGISTRATION · 套准  Δ ${Math.round(440 * (1 - merge))} PX`, R.x, R.y - 22);
   };
 
   return (
     <Scene>
       <Canvas draw={draw} />
-      <Callout x={R.x + R.w * 0.47} y={R.y + R.h * 0.72} dx={-400} dy={50} w={260} title="TARTAN RIBBON · 1861" sub="J. C. MAXWELL · PHOTO T. SUTTON" delay={96} />
-      <Callout x={R.x + R.w * 0.84} y={R.y + R.h * 0.25} dx={140} dy={140} w={320} title="THREE-COLOUR METHOD" sub="三色法 · 第一张彩色照片" delay={110} />
+      <Callout x={R.x + R.w * 0.47} y={R.y + R.h * 0.72} dx={-400} dy={50} w={260} title="第一张彩色照片" sub="J. C. MAXWELL · 1861" delay={96} />
       <Caption at="br" label="COLOUR · 色彩" zh="红、绿、蓝叠在一起，世界第一次有了颜色。" en="Red, green and blue, laid together — and the world had colour." delay={30} />
     </Scene>
   );

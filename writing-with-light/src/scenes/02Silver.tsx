@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
-import {Canvas, clamp, lerp, offscreen, pagoda, prog, rng, TAU} from '../lib';
+import {Canvas, clamp, DPR, lerp, offscreen, pagoda, prog, rng, TAU} from '../lib';
 import {C} from '../theme';
 import {Callout, Caption, Scene} from '../ui';
 
@@ -52,7 +52,7 @@ export const Silver: React.FC = () => {
     }
     ctx.save();
     ctx.globalCompositeOperation = 'screen';
-    ctx.filter = 'blur(28px)';
+    ctx.filter = `blur(${28 * DPR}px)`;
     ctx.fillStyle = `rgba(240,200,150,${0.2 * prog(f, 5, 40) * (1 - prog(f, 90, 140))})`;
     inverted(ctx);
     ctx.restore();
@@ -77,7 +77,7 @@ export const Silver: React.FC = () => {
         <Canvas draw={draw} />
       </AbsoluteFill>
       <AbsoluteFill style={{background: `radial-gradient(ellipse 80% 95% at ${CX}px 45%, rgba(10,9,8,0) 25%, ${C.ink} 100%), linear-gradient(to top, ${C.ink} 10%, rgba(10,9,8,0) 36%)`}} />
-      <Callout x={CX + 0.05 * SHAPE_H} y={TOP + 0.52 * SHAPE_H} dx={260} dy={-190} w={320} title="2AgCl + hν → 2Ag + Cl₂" sub="J. H. SCHULZE · c. 1717" delay={70} />
+      <Callout x={CX + 0.05 * SHAPE_H} y={TOP + 0.52 * SHAPE_H} dx={260} dy={-190} w={320} title="J. H. SCHULZE · c. 1717" delay={70} />
       <Caption at="br" label="SILVER · 银盐" zh="影像总会消散——直到人们发现，银会被光染黑。" en="The image always faded — until we found that silver darkens in light." delay={18} />
     </Scene>
   );

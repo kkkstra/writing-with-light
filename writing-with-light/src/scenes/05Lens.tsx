@@ -176,8 +176,8 @@ export const Lens: React.FC = () => {
         <TextRing spin={spin} front opacity={prog(f, 20, 60) * hud} />
       </AbsoluteFill>
       <AbsoluteFill style={{opacity: hud}}>
-        <Readout align="left" label="APERTURE · 光圈" value={`f/${N.toFixed(1)}`} unit="t ∝ N²" style={{opacity: prog(f, 60, 80)}} />
-        <Callout x={CX + 250 * Math.cos(0.7)} y={CY + 250 * Math.sin(0.7)} dx={130} dy={110} w={330} title="PETZVAL · 1841 · f/3.6" sub="≈ 15× FASTER THAN f/14 · 快约 15 倍" delay={150} />
+        <Readout align="left" label="APERTURE · 光圈" value={`f/${N.toFixed(1)}`} style={{opacity: prog(f, 60, 80)}} />
+        <Callout x={CX + 250 * Math.cos(0.7)} y={CY + 250 * Math.sin(0.7)} dx={130} dy={110} w={330} title="PETZVAL · f/3.6 · 1841" sub="快约 15 倍" delay={150} />
         <Caption label="PHOTOGRAPHY · 摄影" zh="1839 年，它有了名字：用光书写。" en="In 1839, it was given a name: writing with light." delay={40} />
       </AbsoluteFill>
       <AbsoluteFill style={{background: '#fff', opacity: prog(f, 262, 282, (x) => x)}} />

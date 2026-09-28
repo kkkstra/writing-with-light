@@ -61,7 +61,7 @@ export const Everyone: React.FC = () => {
       <Canvas draw={draw} />
       <AbsoluteFill style={{background: `radial-gradient(ellipse 300px 90px at 1370px 272px, rgba(10,9,8,0.85), rgba(10,9,8,0)), linear-gradient(to top, ${C.ink} 22%, rgba(10,9,8,0.6) 38%, rgba(10,9,8,0) 55%)`}} />
       <AbsoluteFill style={{background: '#fff', opacity: 0.5 * Math.max(0, 1 - Math.abs(f - 22) / 6)}} />
-      <Callout x={960 + 95} y={470 - 76} dx={150} dy={-120} w={320} title="KODAK Nº 1 · 1888" sub="100 EXPOSURES · $25 · 一百张胶卷" delay={34} />
+      <Callout x={960 + 95} y={470 - 76} dx={150} dy={-120} w={320} title="一百张胶卷" sub="KODAK Nº 1 · 1888" delay={34} />
       <Caption label="EVERYONE · 人人" zh="“你只管按下快门，剩下的交给我们。”" en="“You press the button, we do the rest.”" delay={36} />
     </Scene>
   );

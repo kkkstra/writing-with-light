@@ -37,17 +37,17 @@ export const Video: React.FC = () => (
     <Counter />
     <Letterbox />
     <Grain />
-    {/* The track lifts at 44.5 s, so trimming 32.5 s lands the lift on 0:12 as the counter appears. */}
-    <Audio src={staticFile('audio/dreams-become-real.mp3')} trimBefore={sec(32.5)} volume={(f) => interpolate(f, [0, sec(1.5), TOTAL - sec(5), TOTAL], [0, 1, 1, 0], clamp)} />
+    {/* 112.3 BPM, drop at 17.0 s: trimming 4.8 s puts the drop on 0:12.2 and a downbeat on the 63.5 s hard cut. */}
+    <Audio src={staticFile('audio/bgm.m4a')} trimBefore={sec(4.8)} volume={(f) => 0.6 * interpolate(f, [0, sec(1.5), TOTAL - sec(5), TOTAL], [0, 1, 1, 0], clamp)} />
     <Sequence from={sec(CHAPTERS.everyone[0]) + 19} durationInFrames={sec(0.7)}>
-      <Audio src={staticFile('audio/click.mp3')} volume={0.45} />
+      <Audio src={staticFile('audio/click.mp3')} volume={0.5} />
     </Sequence>
     <Sequence from={sec(CHAPTERS.motion[0])} durationInFrames={sec(5)}>
-      <Audio src={staticFile('audio/projector.mp3')} volume={(f) => 0.5 * interpolate(f, [0, 20, 130, 150], [0, 1, 1, 0], clamp)} />
+      <Audio src={staticFile('audio/projector.mp3')} volume={(f) => 0.8 * interpolate(f, [0, 20, 130, 150], [0, 1, 1, 0], clamp)} />
     </Sequence>
     {/* Two-stage shutter: opens with the light flash, closes on the hard cut to the card. */}
     <Sequence from={sec(CHAPTERS.card[0] - 0.55)} durationInFrames={sec(1.2)}>
-      <Audio src={staticFile('audio/shutter.mp3')} volume={0.7} />
+      <Audio src={staticFile('audio/shutter.mp3')} volume={0.6} />
     </Sequence>
   </AbsoluteFill>
 );

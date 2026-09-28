@@ -11,15 +11,16 @@ export const C = {
   paperInk: '#1C1A17',
 };
 
-export const F = {sans: 'Noto Sans SC', title: 'Noto Serif SC', serif: 'EB Garamond', mono: 'IBM Plex Mono'};
+const MONO = 'IBM Plex Mono';
+export const F = {sans: 'Noto Sans SC', title: 'Noto Serif SC', serif: 'EB Garamond', mono: `'${MONO}', 'Noto Sans SC'`};
 
 for (const [family, file, weight, style] of [
   [F.sans, 'NotoSansSC.ttf', '100 900', 'normal'],
   [F.title, 'NotoSerifSC.ttf', '200 900', 'normal'],
   [F.serif, 'EBGaramond.ttf', '400 800', 'normal'],
   [F.serif, 'EBGaramond-Italic.ttf', '400 800', 'italic'],
-  [F.mono, 'IBMPlexMono-Light.ttf', '300', 'normal'],
-  [F.mono, 'IBMPlexMono-Regular.ttf', '400', 'normal'],
+  [MONO, 'IBMPlexMono-Light.ttf', '300', 'normal'],
+  [MONO, 'IBMPlexMono-Regular.ttf', '400', 'normal'],
 ]) {
   loadFont({family, url: staticFile(`fonts/${file}`), weight, style});
 }

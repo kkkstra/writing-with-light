@@ -98,9 +98,9 @@ export const Counter: React.FC = () => {
   if (t < 12 || t > 60) return null;
   const prefix = t < 19.5 ? '≥ ' : t >= 47.5 ? '< ' : '≈ ';
   return t < 50 ? (
-    <Readout align="right" label="EXPOSURE · 曝光时间" value={prefix + group(exposureAt(t))} unit="SECONDS · 秒" style={{opacity: Math.max(vis(12, 34.4), vis(44, 49.2))}} />
+    <Readout align="right" label="EXPOSURE · 曝光时间" value={prefix + group(exposureAt(t))} unit="秒" style={{opacity: Math.max(vis(12, 34.4), vis(44, 49.2))}} />
   ) : (
-    <Readout align="right" label="RESOLUTION · 分辨率" value={group(pixelsAt(t))} unit="PIXELS · 像素" style={{opacity: vis(54.4, 60)}} />
+    <Readout align="right" label="RESOLUTION · 分辨率" value={group(pixelsAt(t))} unit="像素" style={{opacity: vis(54.4, 60)}} />
   );
 };
 

@@ -25,6 +25,7 @@ export const Pixel: React.FC = () => {
     if (!imgs || !low) return;
     const zoomOut = prog(f, 128, 188, easeInOut);
     const s = lerp(1, TILE / SIDE, zoomOut);
+    ctx.save();
     ctx.translate(CX, CY);
     ctx.scale(s, s);
     ctx.translate(-CX, -CY);
@@ -49,11 +50,11 @@ export const Pixel: React.FC = () => {
         const col = (i % 49) - 24, row = Math.floor(i / 49) - 14;
         if (!col && !row) return;
         ctx.globalAlpha = t.a * prog(zoomOut, 0, 0.5);
-        ctx.drawImage(thumbs[t.thumb], 20, 0, 120, 120, CX + col * STEP - SIDE / 2, CY + row * STEP - SIDE / 2, SIDE, SIDE);
+        const {width: tw, height: th} = thumbs[t.thumb];
+        ctx.drawImage(thumbs[t.thumb], (tw - th) / 2, 0, th, th, CX + col * STEP - SIDE / 2, CY + row * STEP - SIDE / 2, SIDE, SIDE);
       });
-      ctx.globalAlpha = 1;
     }
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.restore();
 
     // Loupe: a 6 × 6 patch of the 100 × 100 image with its grey levels.
     const loupe = prog(f, 10, 28) * (1 - prog(f, 100, 118));
@@ -79,11 +80,6 @@ export const Pixel: React.FC = () => {
         ctx.fillText(`${v}`, x + LOUPE.cell / 2, y + LOUPE.cell / 2 + 4);
       }
       ctx.textAlign = 'left';
-      ctx.font = `400 14px ${F.mono}`;
-      ctx.fillStyle = 'rgba(236,232,225,0.6)';
-      ctx.fillText('PIXEL · 像素', LOUPE.x, LOUPE.y - 16);
-      ctx.fillStyle = 'rgba(236,232,225,0.45)';
-      ctx.fillText(`(${LOUPE.px}, ${LOUPE.py}) · 8-BIT GREY`, LOUPE.x, LOUPE.y + L + 26);
       ctx.globalAlpha = 1;
     }
   };
@@ -91,7 +87,7 @@ export const Pixel: React.FC = () => {
   return (
     <Scene>
       <Canvas draw={draw} />
-      <Callout x={X0} y={Y0 + 120} dx={-110} dy={-50} w={340} title="S. SASSON · KODAK · 1975" sub="100 × 100 PIXELS · 23 s PER IMAGE" delay={14} />
+      <Callout x={X0} y={Y0 + 120} dx={-110} dy={-50} w={340} title="第一台数码相机" sub="S. SASSON · 1975" delay={14} />
       <Caption label="PIXEL · 像素" zh="如今，每年有超过一万亿张照片被拍下。" en="Today, more than a trillion photographs are taken every year." delay={70} />
     </Scene>
   );
