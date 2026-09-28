@@ -1,0 +1,23 @@
+{
+  "name": "writing-with-light",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "still": "remotion still",
+    "render": "remotion render Main out/writing-with-light.mp4 --crf=18",
+    "typecheck": "tsc --noEmit",
+    "fonts": "python3 scripts/subset-fonts.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/fonts": "4.0.529",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
